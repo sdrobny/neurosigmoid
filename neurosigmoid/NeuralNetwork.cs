@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -139,7 +140,7 @@ namespace neurosigmoid
                         Neuron n = this.Layers[j].Neurons[k];
                         //Wyliczenia
                         n.Delta = n.Value * (1 - n.Value) * this.Layers[j + 1].Neurons[i].Dendrites[k].Weight * this.Layers[j + 1].Neurons[i].Delta;
-
+                  
                     }
                 }
 
