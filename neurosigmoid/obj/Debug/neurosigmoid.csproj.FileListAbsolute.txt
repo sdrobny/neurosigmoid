@@ -1,0 +1,10 @@
+C:\Users\Szymon Drobny\source\repos\neurosigmoid\neurosigmoid\bin\Debug\neurosigmoid.exe.config
+C:\Users\Szymon Drobny\source\repos\neurosigmoid\neurosigmoid\bin\Debug\neurosigmoid.exe
+C:\Users\Szymon Drobny\source\repos\neurosigmoid\neurosigmoid\bin\Debug\neurosigmoid.pdb
+C:\Users\Szymon Drobny\source\repos\neurosigmoid\neurosigmoid\obj\Debug\neurosigmoid.csprojAssemblyReference.cache
+C:\Users\Szymon Drobny\source\repos\neurosigmoid\neurosigmoid\obj\Debug\neurosigmoid.Properties.Resources.resources
+C:\Users\Szymon Drobny\source\repos\neurosigmoid\neurosigmoid\obj\Debug\neurosigmoid.csproj.GenerateResource.cache
+C:\Users\Szymon Drobny\source\repos\neurosigmoid\neurosigmoid\obj\Debug\neurosigmoid.csproj.CoreCompileInputs.cache
+C:\Users\Szymon Drobny\source\repos\neurosigmoid\neurosigmoid\obj\Debug\neurosigmoid.exe
+C:\Users\Szymon Drobny\source\repos\neurosigmoid\neurosigmoid\obj\Debug\neurosigmoid.pdb
+C:\Users\Szymon Drobny\source\repos\neurosigmoid\neurosigmoid\obj\Debug\neurosigmoid.neurosigmoid.resources
