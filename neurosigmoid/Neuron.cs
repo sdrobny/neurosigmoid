@@ -8,11 +8,15 @@ namespace neurosigmoid
 {
     class Neuron
     {
+        //Wartosci do rekalibracji przy uczeniu (roznica?)
         public double Delta { get; set; }
-        public double Value { get; set; }
+        //Wartosci do rekalibracji przy uczeniu (blad?)
         public double Bias { get; set; }
+        //Wartosc
+        public double Value { get; set; }
+        //Dendryty
         public List<Dendrite> Dendrites { get; set; }
-
+        //Liczba dendrytów
         public int DendrideCount { get { return Dendrites.Count; } }
 
         public Neuron()

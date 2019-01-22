@@ -12,6 +12,9 @@ namespace neurosigmoid
         public List<Layer> Layers { get; set; }
         public int LayerCount { get { return Layers.Count; } }
 
+        /*
+         * Kosntruktor sieci -  tworzenie warstw i struktur
+         */
         public NeuralNetwork(double learningRate, int[] layers)
         {
             if (layers.Length < 2) return;
@@ -107,12 +110,11 @@ namespace neurosigmoid
         
 
         /*
-         * Uczenie sieci, poprzez porownywanie z danymi wejsciowymi (nauczycielem)
+         * Uczenie sieci, poprzez porownywanie z danymi wejsciowymi (nauczycielem), modyfikacja danych neuronu poprzez jakies kawaboonga wzory
         */
         public bool Train(List<double> input, List<double> output)
         {
-            //Jesli liczba danych wejscia nie jest rowna ilosci neuronow warstwy 0,
-            //lub liczba danych wyjscia nie jest rowna ilosci danych ostatnije warstwy funkcja zwraca false
+            //Poprawnosc danych we/wy a liczby neuronow pierwszej/ostatniej warstwy
             if ((input.Count != this.Layers[0].Neurons.Count) || (output.Count != this.Layers[this.Layers.Count - 1].Neurons.Count )) return false;
 
             //Przypisanie, oraz przetworzenie danych oraz wartosci neuronow
@@ -120,20 +122,43 @@ namespace neurosigmoid
 
             
             //Dla wszystkich neuronow ostatniej warstwy
-            for(int i = 0; i< this.Layers[thisLayers.Count - 1].Neurons.Count; i++)
+            for(int i = 0; i< this.Layers[this.Layers.Count - 1].Neurons.Count; i++)
             {
                 //Pobranie aktualnego neuronu
                 Neuron neuron = this.Layers[this.Layers.Count - 1].Neurons[i];
                 //Policzenie mu delty 
                 neuron.Delta = neuron.Value * (1 - neuron.Value) * (output[i] - neuron.Value);
 
-                //Petla jakas ... jutro bo nie mysle
+                //Petla przez "srodkowe" warstwy
                 for(int j = this.Layers.Count - 2; j > 2; j--)
                 {
+                    //Petla przez neurony aktualnej warstwy
+                    for (int k = 0; k < this.Layers[j].Neurons.Count; k++)
+                    {
+                        //Pobranie aktualnego neuronu
+                        Neuron n = this.Layers[j].Neurons[k];
+                        //Wyliczenia
+                        n.Delta = n.Value * (1 - n.Value) * this.Layers[j + 1].Neurons[i].Dendrites[k].Weight * this.Layers[j + 1].Neurons[i].Delta;
 
+                    }
                 }
 
             }
+
+            //Przez warstwy od ostatniej do 1
+            for (int i = this.Layers.Count - 1; i > 1; i--)
+            {
+                for (int j = 0; j < this.Layers[i].Neurons.Count - 1; j++)
+                {
+                    Neuron n = this.Layers[i].Neurons[j];
+                    //Liczenie Biasu
+                    n.Bias = n.Bias + (this.LearningRate * n.Delta);
+                    //Liczenie wag dendrytów
+                    for(int k = 0; k < n.Dendrites.Count; k++) n.Dendrites[k].Weight = n.Dendrites[k].Weight + (this.LearningRate * this.Layers[i - 1].Neurons[k].Value * n.Delta);
+                }
+            }
+
+            return true;
 
         }
 
