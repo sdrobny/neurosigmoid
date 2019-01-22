@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -112,17 +113,17 @@ namespace neurosigmoid
         /*
          * Uczenie sieci, poprzez porownywanie z danymi wejsciowymi (nauczycielem), modyfikacja danych neuronu poprzez jakies kawaboonga wzory
         */
-        public bool Train(List<double> input, List<double> output)
+        public bool Train(ref List<double> input, ref List<double> output)
         {
             //Poprawnosc danych we/wy a liczby neuronow pierwszej/ostatniej warstwy
             if ((input.Count != this.Layers[0].Neurons.Count) || (output.Count != this.Layers[this.Layers.Count - 1].Neurons.Count )) return false;
 
             //Przypisanie, oraz przetworzenie danych oraz wartosci neuronow
-            Run(input);
+            input = new List<double>(Run(input));
+            //(Run(input)
 
-            
             //Dla wszystkich neuronow ostatniej warstwy
-            for(int i = 0; i< this.Layers[this.Layers.Count - 1].Neurons.Count; i++)
+            for (int i = 0; i< this.Layers[this.Layers.Count - 1].Neurons.Count; i++)
             {
                 //Pobranie aktualnego neuronu
                 Neuron neuron = this.Layers[this.Layers.Count - 1].Neurons[i];
@@ -139,7 +140,7 @@ namespace neurosigmoid
                         Neuron n = this.Layers[j].Neurons[k];
                         //Wyliczenia
                         n.Delta = n.Value * (1 - n.Value) * this.Layers[j + 1].Neurons[i].Dendrites[k].Weight * this.Layers[j + 1].Neurons[i].Delta;
-
+                  
                     }
                 }
 
